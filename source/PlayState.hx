@@ -155,7 +155,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		psych.Paths.clearStoredMemory();
+		//psych.Paths.clearStoredMemory();
 		
 		KeyBinds.keyCheck();
 
@@ -724,7 +724,7 @@ class PlayState extends MusicBeatState
 
 		super.create();
 		
-		psych.Paths.clearUnusedMemory();
+		//psych.Paths.clearUnusedMemory();
 	}
 
 	function doStopSign(sign:Int = 0, fuck:Bool = false)

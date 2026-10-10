@@ -48,6 +48,8 @@ class Main extends Sprite
 		
 		CrashHandler.init();
 		
+		hxvlc.util.Handle.init(#if (hxvlc >= "1.8.0")  ['--no-lua'] #end);
+		
 		super();
 
 		if (stage != null)

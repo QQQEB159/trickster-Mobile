@@ -249,6 +249,17 @@ class FPSCapOption extends Option
 		else
 			FlxG.save.data.fpsCap = FlxG.save.data.fpsCap + 10;
 		(cast (Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
+		
+		if(FlxG.save.data.fpsCap > FlxG.drawFramerate)
+		{
+			FlxG.updateFramerate = FlxG.save.data.fpsCap;
+			FlxG.drawFramerate = FlxG.save.data.fpsCap;
+		}
+		else
+		{
+			FlxG.drawFramerate = FlxG.save.data.fpsCap;
+			FlxG.updateFramerate = FlxG.save.data.fpsCap;
+		}
 
 		display = "FPS Cap - " + FlxG.save.data.fpsCap;
 
@@ -263,6 +274,17 @@ class FPSCapOption extends Option
 		else
 			FlxG.save.data.fpsCap = FlxG.save.data.fpsCap - 10;
 		(cast (Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
+		
+		if(FlxG.save.data.fpsCap > FlxG.drawFramerate)
+		{
+			FlxG.updateFramerate = FlxG.save.data.fpsCap;
+			FlxG.drawFramerate = FlxG.save.data.fpsCap;
+		}
+		else
+		{
+			FlxG.drawFramerate = FlxG.save.data.fpsCap;
+			FlxG.updateFramerate = FlxG.save.data.fpsCap;
+		}
 
 		display = "FPS Cap - " + FlxG.save.data.fpsCap;
 

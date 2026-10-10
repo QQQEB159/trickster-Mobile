@@ -80,7 +80,9 @@ class MainMenuState extends MusicBeatState
 		var foreground:FlxSprite = new FlxSprite(-750,110).loadGraphic(Paths.image('menu/Transforeground','clown'));
 		foreground.setGraphicSize(Std.int(foreground.width * 0.65));
 		add(foreground);
-		slider = new FlxBackdrop(Paths.image('menu/MenuSlider','clown'),1,0,true,false);
+		slider = new FlxBackdrop(Paths.image('menu/MenuSlider','clown'), X);
+		slider.scrollFactor.x = 1;
+		slider.scrollFactor.y = 0;
 		slider.velocity.set(-14,0);
 		slider.x = -20;
 		slider.y = 209;

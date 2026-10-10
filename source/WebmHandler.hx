@@ -63,7 +63,7 @@ class WebmHandler
 		ended = false;
 		paused = false;
 
-		video.load(vidPath, false, false);
+		video.load(vidPath, null, false);
 	}
 
 	public function play():Void

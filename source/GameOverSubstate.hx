@@ -42,6 +42,9 @@ class GameOverSubstate extends MusicBeatSubstate
 		
 		bf.playAnim('firstDeath');
 		bf.animation.resume();
+		
+		addTouchPad("NONE", "A_B");
+		addTouchPadCamera();
 	}
 
 	var playedMic:Bool = false;

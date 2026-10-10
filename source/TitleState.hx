@@ -50,8 +50,8 @@ class TitleState extends MusicBeatState
 		#end
 		
 		#if sys
-		if (!sys.FileSystem.exists(Sys.getCwd() + "\\assets\\replays"))
-			sys.FileSystem.createDirectory(Sys.getCwd() + "\\assets\\replays");
+		if (!sys.FileSystem.exists(Sys.getCwd() + "assets/replays"))
+			sys.FileSystem.createDirectory(Sys.getCwd() + "assets/replays");
 		#end
 
 		if (FlxG.save.data.newInput == null)
@@ -70,6 +70,14 @@ class TitleState extends MusicBeatState
 		// DEBUG BULLSHIT
 
 		super.create();
+		
+		#if cpp
+		cpp.NativeGc.run(true);
+		#elseif hl
+		hl.Gc.major();
+		#end
+		
+		mobile.MobileData.init();
 
 		// NGio.noLogin(APIStuff.API);
 

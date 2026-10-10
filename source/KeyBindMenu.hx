@@ -96,6 +96,8 @@ class KeyBindMenu extends MusicBeatState
 
         textUpdate();
 
+		addTouchPad("NONE", "B");
+		
 		super.create();
 	}
 
@@ -121,7 +123,7 @@ class KeyBindMenu extends MusicBeatState
                     FlxG.sound.play(Paths.sound('Hover','clown'));
                     state = "input";
                 }
-                else if(FlxG.keys.justPressed.ESCAPE){
+                else if(controls.BACK){
                     FlxG.sound.play(Paths.sound('confirm','clown'));
                     quit();
                 }

@@ -98,10 +98,12 @@ class WebmHandler
 	{
 		if (!initialized || video == null) return;
 
-		video.x = GlobalVideo.calc(0);
-		video.y = GlobalVideo.calc(1);
-		video.width = GlobalVideo.calc(2);
-		video.height = GlobalVideo.calc(3);
+		// GlobalVideo.calc 返回的是 stage 物理像素，FlxVideo 挂在 FlxG.game 下
+		// （FlxG.game 自带 scale 缩放），必须换算到本地坐标，否则位置/尺寸会被放大偏移
+		video.x = GlobalVideo.calc(0) / FlxG.game.scaleX;
+		video.y = GlobalVideo.calc(1) / FlxG.game.scaleY;
+		video.width = GlobalVideo.calc(2) / FlxG.game.scaleX;
+		video.height = GlobalVideo.calc(3) / FlxG.game.scaleY;
 	}
 
 	public function pause():Void

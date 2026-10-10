@@ -23,14 +23,14 @@ class OptionsMenu extends MusicBeatState
 		new OptionCatagory("Gameplay", [
 			new DFJKOption(controls),
 			new GhostTapOption("Ghost Tapping is when you tap a direction and it doesn't give you a miss."),
-			#if desktop
+			#if sys
 			new FPSCapOption("Cap your FPS (Left for -10, Right for +10. SHIFT to go faster)"),
 			#end
 			new ScrollSpeedOption("Change your scroll speed (Left for -0.1, right for +0.1. If it's at 1, it will be chart dependent)"),
 			new AccuracyDOption("Change how accuracy is calculated. (Accurate = Simple, Complex = Milisecond Based)"),
 		]),
 		new OptionCatagory("Appearance", [
-			#if desktop
+			#if sys
 			new AccuracyOption("Display accuracy information."),
 			new NPSDisplayOption("Shows your current Notes Per Second."),
 			new SongPositionOption("Show the songs current position (as a bar)"),
@@ -104,6 +104,9 @@ class OptionsMenu extends MusicBeatState
 		menuShade.setGraphicSize(Std.int(menuShade.width * 0.7));
 		add(menuShade);
 
+		addTouchPad("LEFT_FULL", "A_B");
+		addTouchPadCamera();
+		
 		super.create();
 	}
 
@@ -157,9 +160,9 @@ class OptionsMenu extends MusicBeatState
 				curSelected = 0;
 				currentOptions[curSelected].color = FlxColor.WHITE;
 			}
-			if (FlxG.keys.justPressed.UP)
+			if (controls.UP_P)
 				changeSelection(-1);
-			if (FlxG.keys.justPressed.DOWN)
+			if (controls.DOWN_P)
 				changeSelection(1);
 			
 			if (isCat)
@@ -181,12 +184,12 @@ class OptionsMenu extends MusicBeatState
 						}
 					else
 					{
-						if (FlxG.keys.justPressed.RIGHT)
+						if (controls.RIGHT_P)
 						{
 							currentSelectedCat.getOptions()[curSelected].right();
 							currentOptions[curSelected].text = currentSelectedCat.getOptions()[curSelected].getDisplay();
 						}
-						if (FlxG.keys.justPressed.LEFT)
+						if (controls.LEFT_P)
 						{
 							currentSelectedCat.getOptions()[curSelected].left();
 							currentOptions[curSelected].text = currentSelectedCat.getOptions()[curSelected].getDisplay();
@@ -204,9 +207,9 @@ class OptionsMenu extends MusicBeatState
 					}
 					else
 					{
-						if (FlxG.keys.justPressed.RIGHT)
+						if (controls.RIGHT_P)
 							FlxG.save.data.offset++;
-						if (FlxG.keys.justPressed.LEFT)
+						if (controls.LEFT_P)
 							FlxG.save.data.offset--;
 					}
 				}
@@ -222,9 +225,9 @@ class OptionsMenu extends MusicBeatState
 					}
 					else
 					{
-						if (FlxG.keys.justPressed.RIGHT)
+						if (controls.RIGHT_P)
 							FlxG.save.data.offset++;
-						if (FlxG.keys.justPressed.LEFT)
+						if (controls.LEFT_P)
 							FlxG.save.data.offset--;
 					}
 			}

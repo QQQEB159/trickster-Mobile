@@ -81,6 +81,9 @@ class PauseSubState extends MusicBeatSubstate
 		FlxTween.globalManager.active = false;
 
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+		
+		addTouchPad("UP_DOWN", "A");
+		addTouchPadCamera();
 	}
 
 	override function update(elapsed:Float)

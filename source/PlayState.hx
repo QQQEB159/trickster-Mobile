@@ -41,6 +41,10 @@ import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 
+import mobile.TouchButton;
+import mobile.TouchPad;
+import mobile.input.MobileInputID;
+
 using StringTools;
 
 class PlayState extends MusicBeatState
@@ -540,6 +544,13 @@ class PlayState extends MusicBeatState
 
 		// startCountdown();
 
+		#if !android
+		addTouchPad("NONE", "P");
+		addTouchPadCamera();
+		touchPad.visible = true;
+		#end
+		addMobileControls();
+		
 		generateSong(SONG.song);
 
 		// add(strumLine);
@@ -1445,7 +1456,7 @@ class PlayState extends MusicBeatState
 		generateStaticArrows(1);
 
 		talking = false;
-		startedCountdown = true;
+		startedCountdown = mobileControls.instance.visible = true;
 		Conductor.songPosition = 0;
 		Conductor.songPosition -= Conductor.crochet * 5;
 
@@ -1898,7 +1909,7 @@ class PlayState extends MusicBeatState
 
 		scoreTxt.text = Ratings.CalculateRanking(songScore,0,nps,accuracy);
 
-		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
+		if ((FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #else || touchPad.buttonP.justPressed #end) && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -2249,6 +2260,7 @@ class PlayState extends MusicBeatState
 	{
 		var song = SONG.song;
 		canPause = false;
+		mobileControls.instance.visible = #if !android touchPad.visible = #end false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
 			#if !switch

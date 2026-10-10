@@ -2,6 +2,9 @@ package;
 
 import lime.utils.Assets;
 
+import flixel.util.FlxColor;
+import flixel.FlxG;
+
 using StringTools;
 
 class CoolUtil
@@ -13,6 +16,17 @@ class CoolUtil
 		return difficultyArray[PlayState.storyDifficulty];
 	}
 
+	public static function colorFromString(color:String):FlxColor
+	{
+		var hideChars = ~/[\t\n\r]/;
+		var color:String = hideChars.split(color).join('').trim();
+		if(color.startsWith('0x')) color = color.substring(color.length - 6);
+
+		var colorNum:Null<FlxColor> = FlxColor.fromString(color);
+		if(colorNum == null) colorNum = FlxColor.fromString('#$color');
+		return colorNum != null ? colorNum : FlxColor.WHITE;
+	}
+	
 	public static function coolTextFile(path:String):Array<String>
 	{
 		var daList:Array<String> = Assets.getText(path).trim().split('\n');
@@ -45,5 +59,14 @@ class CoolUtil
 			dumbArray.push(i);
 		}
 		return dumbArray;
+	}
+	
+	public static function showPopUp(message:String, title:String):Void
+	{
+		/* #if android
+		android.Tools.showAlertDialog(title, message, {name: "OK", func: null}, null);
+		#else */
+		FlxG.stage.window.alert(message, title);
+		//#end
 	}
 }

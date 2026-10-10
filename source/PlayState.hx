@@ -155,6 +155,8 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		psych.Paths.clearStoredMemory();
+		
 		KeyBinds.keyCheck();
 
 		FlxG.sound.cache(Paths.inst(PlayState.SONG.song));
@@ -721,6 +723,8 @@ class PlayState extends MusicBeatState
 		}
 
 		super.create();
+		
+		psych.Paths.clearUnusedMemory();
 	}
 
 	function doStopSign(sign:Int = 0, fuck:Bool = false)

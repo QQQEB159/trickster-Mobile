@@ -1,0 +1,61 @@
+[
+    {
+        "profile": "default",
+        "pkgs": [
+            {
+                "name": "flixel",
+                "version": "5.2.2"
+            },
+            {
+                "name": "flixel-addons",
+                "version": "3.0.2"
+            },
+            {
+                "name": "flixel-ui",
+                "version": "2.5.0"
+            },
+            {
+                "name": "hscript",
+                "version": "2.5.0"
+            },
+            {
+                "name": "flixel-tools",
+                "version": "1.5.1"
+            },
+            {
+                "name": "newgrounds",
+                "version": "1.2.0"
+            },
+            {
+                "name": "polymod",
+                "version": "1.3.0"
+            },
+            {
+                "name": "actuate",
+                "version": "1.8.9"
+            },
+            {
+                "name": "hxcpp",
+                "link": "https://github.com/ShadowEngineTeam/hxcpp",
+                "branch": "main"
+            },
+            {
+                "name": "lime",
+                "link": "https://github.com/QQQEB159/lime-8.2.2",
+                "branch": "main"
+            },
+            {
+                "name": "openfl",
+                "version": "9.2.2"
+            },
+            {
+                "name": "hxvlc",
+                "version": "2.3.1"
+            },
+            {
+                "name": "hxcpp-debug-server",
+                "version": "1.2.4"
+            }
+        ]
+    }
+]

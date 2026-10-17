@@ -45,7 +45,9 @@ class OptionsMenu extends MusicBeatState
 		]),
 		
 		new OptionCatagory("Mobile Options", [
-			new MobileControlOption("ported by qqqeb")
+			new MobileControlOption("ported by qqqeb"),
+			new TouchPadAlphaOption("touchPad Alpha"),
+			new HitboxAlphaOption("Hitbox Alpha")
 		])
 		
 	];

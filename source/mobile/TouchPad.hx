@@ -110,7 +110,7 @@ class TouchPad extends MobileInputManager implements IMobileControls
 			case NONE: // nothing
 		}
 
-		alpha = 0.6;
+		alpha = FlxG.save.data.touchPadAlpha;
 		scrollFactor.set();
 		updateTrackedButtons();
 

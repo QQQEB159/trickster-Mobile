@@ -159,8 +159,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		psych.Paths.clearStoredMemory();
-		psych.Paths.clearUnusedMemory();
+		//psych.Paths.clearStoredMemory();
 		
 		KeyBinds.keyCheck();
 

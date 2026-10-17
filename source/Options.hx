@@ -424,3 +424,101 @@ class MobileControlOption extends Option
 		return "Mobile Control";
 	}
 }
+
+class TouchPadAlphaOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+		acceptValues = true;
+	}
+
+	public override function press():Bool
+	{
+		return false;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "TouchPad Opacity - " + FlxG.save.data.touchPadAlpha;
+	}
+
+	override function right():Bool {
+		FlxG.save.data.touchPadAlpha += 0.1;
+
+		if (FlxG.save.data.touchPadAlpha < 0)
+			FlxG.save.data.touchPadAlpha = 0;
+
+		if (FlxG.save.data.touchPadAlpha > 1)
+			FlxG.save.data.touchPadAlpha = 1;
+		
+		display = "TouchPad Opacity - " + FlxG.save.data.touchPadAlpha;
+		MusicBeatState.getState().touchPad.alpha = FlxG.save.data.touchPadAlpha;
+
+		return true;
+	}
+
+	override function left():Bool {
+		FlxG.save.data.touchPadAlpha -= 0.1;
+
+		if (FlxG.save.data.touchPadAlpha < 0)
+			FlxG.save.data.touchPadAlpha = 0;
+
+		if (FlxG.save.data.touchPadAlpha > 1)
+			FlxG.save.data.touchPadAlpha = 1;
+		
+		display = "TouchPad Opacity - " + FlxG.save.data.touchPadAlpha;
+		MusicBeatState.getState().touchPad.alpha = FlxG.save.data.touchPadAlpha;
+
+		return true;
+	}
+}
+
+class HitboxAlphaOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+		acceptValues = true;
+	}
+
+	public override function press():Bool
+	{
+		return false;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Hitbox Opacity - " + FlxG.save.data.hitboxAlpha;
+	}
+
+	override function right():Bool {
+		FlxG.save.data.hitboxAlpha += 0.1;
+
+		if (FlxG.save.data.hitboxAlpha < 0)
+			FlxG.save.data.hitboxAlpha = 0;
+
+		if (FlxG.save.data.hitboxAlpha > 1)
+			FlxG.save.data.hitboxAlpha = 1;
+		
+		display = "Hitbox Opacity - " + FlxG.save.data.hitboxAlpha;
+
+		return true;
+	}
+
+	override function left():Bool {
+		FlxG.save.data.hitboxAlpha -= 0.1;
+
+		if (FlxG.save.data.hitboxAlpha < 0)
+			FlxG.save.data.hitboxAlpha = 0;
+
+		if (FlxG.save.data.hitboxAlpha > 1)
+			FlxG.save.data.hitboxAlpha = 1;
+		
+		display = "Hitbox Opacity - " + FlxG.save.data.hitboxAlpha;
+
+		return true;
+	}
+}

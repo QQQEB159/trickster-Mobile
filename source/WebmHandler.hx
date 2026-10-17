@@ -3,19 +3,20 @@ package;
 import flixel.FlxG;
 import openfl.display.Sprite;
 #if !web
-import hxvlc.flixel.FlxVideo;
+import hxvlc.flixel.FlxVideoSprite;
 #end
 
 /**
  * hxvlc 视频适配层（替代原 webm extension 实现）
- * - 桌面端 / 移动端统一使用 hxvlc.flixel.FlxVideo 播放（VLC 内核，支持 webm/mp4）
- * - FlxVideo 渲染在游戏顶层，需挂到 FlxG.game 显示列表，不能进 FlxState 树
+ * - 桌面端 / 移动端统一使用 hxvlc.flixel.FlxVideoSprite 播放（VLC 内核，支持 webm/mp4）
+ * - FlxVideoSprite extends FlxSprite，走 flixel 渲染管线，可直接 add 进状态树，
+ *   坐标/缩放/居中与游戏 UI 完全一致，不会像 FlxVideo 那样出现偏移或大小问题
  * - web 端保留占位（web 目标继续走 VideoHandler/NetStream）
  */
 class WebmHandler
 {
 	#if !web
-	public var video:FlxVideo;
+	public var video:FlxVideoSprite;
 	public var vidPath:String = "";
 	public var initialized:Bool = false;
 
@@ -40,13 +41,13 @@ class WebmHandler
 	{
 		if (initialized) return;
 
-		video = new FlxVideo();
-		video.onEndReached.add(function()
+		video = new FlxVideoSprite();
+		// FlxVideoSprite 的事件/音量挂在 bitmap（内部 FlxVideo）上
+		video.bitmap.onEndReached.add(function()
 		{
 			onEnd();
 		});
 		video.visible = false;
-		FlxG.game.addChild(video);
 
 		initialized = true;
 	}
@@ -98,9 +99,7 @@ class WebmHandler
 	{
 		if (!initialized || video == null) return;
 
-		// FlxVideo 挂在 FlxG.game 下，坐标系是 flixel 逻辑坐标（FlxG.width/height），
-		// 不能用 GlobalVideo.calc 的 stage 物理像素，否则全面屏/缩放下会偏移。
-		// 这里直接用逻辑分辨率做 letterbox 居中，与分辨率/缩放脱钩。
+		// FlxVideoSprite 走 flixel 逻辑坐标，直接用 FlxG.width/height 做 letterbox 居中
 		var ratioX:Float = GameDimensions.height / GameDimensions.width;
 		var ratioY:Float = GameDimensions.width / GameDimensions.height;
 		var appliedWidth:Float = FlxG.height * ratioY;
@@ -119,10 +118,10 @@ class WebmHandler
 			appliedWidth = FlxG.width;
 		}
 
+		video.setGraphicSize(Std.int(appliedWidth), Std.int(appliedHeight));
+		video.updateHitbox();
 		video.x = remainingX;
 		video.y = remainingY;
-		video.width = appliedWidth;
-		video.height = appliedHeight;
 	}
 
 	public function pause():Void

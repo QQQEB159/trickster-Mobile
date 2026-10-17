@@ -61,6 +61,10 @@ class VideoState extends MusicBeatState
 		if (GlobalVideo.isWebm)
 		{
 			GlobalVideo.get().updatePlayer();
+			#if !web
+			// FlxVideoSprite 是 FlxSprite，add 进状态树走 flixel 渲染管线
+			add(GlobalVideo.getWebm().video);
+			#end
 		}
 		GlobalVideo.get().show();
 		GlobalVideo.get().play();

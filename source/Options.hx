@@ -407,9 +407,10 @@ class AccuracyDOption extends Option
 
 class MobileControlOption extends Option
 {
-	public function new()
+	public function new(desc:String)
 	{
 		super();
+		description = desc;
 	}
 
 	public override function press():Bool

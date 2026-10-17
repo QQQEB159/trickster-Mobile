@@ -42,6 +42,10 @@ class OptionsMenu extends MusicBeatState
 		
 		new OptionCatagory("Misc", [
 			new FPSOption("Toggle the FPS Counter")
+		]),
+		
+		new OptionCatagory("Mobile Options", [
+			new MobileControlOption("ported by qqqeb")
 		])
 		
 	];

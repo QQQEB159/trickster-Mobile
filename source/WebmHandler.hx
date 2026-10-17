@@ -98,12 +98,31 @@ class WebmHandler
 	{
 		if (!initialized || video == null) return;
 
-		// GlobalVideo.calc 返回的是 stage 物理像素，FlxVideo 挂在 FlxG.game 下
-		// （FlxG.game 自带 scale 缩放），必须换算到本地坐标，否则位置/尺寸会被放大偏移
-		video.x = GlobalVideo.calc(0) / FlxG.game.scaleX;
-		video.y = GlobalVideo.calc(1) / FlxG.game.scaleY;
-		video.width = GlobalVideo.calc(2) / FlxG.game.scaleX;
-		video.height = GlobalVideo.calc(3) / FlxG.game.scaleY;
+		// FlxVideo 挂在 FlxG.game 下，坐标系是 flixel 逻辑坐标（FlxG.width/height），
+		// 不能用 GlobalVideo.calc 的 stage 物理像素，否则全面屏/缩放下会偏移。
+		// 这里直接用逻辑分辨率做 letterbox 居中，与分辨率/缩放脱钩。
+		var ratioX:Float = GameDimensions.height / GameDimensions.width;
+		var ratioY:Float = GameDimensions.width / GameDimensions.height;
+		var appliedWidth:Float = FlxG.height * ratioY;
+		var appliedHeight:Float = FlxG.width * ratioX;
+		var remainingX:Float = (FlxG.width - appliedWidth) / 2;
+		var remainingY:Float = (FlxG.height - appliedHeight) / 2;
+
+		if (appliedHeight > FlxG.height)
+		{
+			remainingY = 0;
+			appliedHeight = FlxG.height;
+		}
+		if (appliedWidth > FlxG.width)
+		{
+			remainingX = 0;
+			appliedWidth = FlxG.width;
+		}
+
+		video.x = remainingX;
+		video.y = remainingY;
+		video.width = appliedWidth;
+		video.height = appliedHeight;
 	}
 
 	public function pause():Void

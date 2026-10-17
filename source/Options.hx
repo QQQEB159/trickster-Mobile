@@ -404,3 +404,22 @@ class AccuracyDOption extends Option
 		return "Accuracy Mode: " + (FlxG.save.data.accuracyMod == 0 ? "Accurate" : "Complex");
 	}
 }
+
+class MobileControlOption extends Option
+{
+	public function new()
+	{
+		super();
+	}
+
+	public override function press():Bool
+	{
+		MusicBeatState.getState().openSubState(new mobile.MobileControlSelectSubState());
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "Mobile Control";
+	}
+}

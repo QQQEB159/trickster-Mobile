@@ -70,6 +70,15 @@ class VideoState extends MusicBeatState
 		GlobalVideo.get().play();
 	}
 	
+	override function destroy():Void
+	{
+		// FlxVideoSprite 是全局复用的，不能让它跟着本 state 一起被 flixel destroy（bitmap 会被清空导致下次 update 崩）
+		#if !web
+		if (GlobalVideo.getWebm().video != null) remove(GlobalVideo.getWebm().video);
+		#end
+		super.destroy();
+	}
+
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);

@@ -78,10 +78,10 @@ class KadeEngineData
 		if (FlxG.save.data.beatEx == null)
 			FlxG.save.data.beatEx = false;
 			
-		if (FlxG.save.data.touchPadAlpha == null)
+		if (FlxG.save.data.touchPadAlpha == null || FlxG.save.data.touchPadAlpha == 0)
 			FlxG.save.data.touchPadAlpha = 0.6;
 			
-		if (FlxG.save.data.hitboxAlpha == null)
+		if (FlxG.save.data.hitboxAlpha == null || FlxG.save.data.hitboxAlpha == 0)
 			FlxG.save.data.hitboxAlpha = 0.6;
 
 		Conductor.recalculateTimings();

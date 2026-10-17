@@ -447,8 +447,8 @@ class TouchPadAlphaOption extends Option
 	override function right():Bool {
 		FlxG.save.data.touchPadAlpha = Math.round((FlxG.save.data.touchPadAlpha + 0.1) * 10) / 10;
 
-		if (FlxG.save.data.touchPadAlpha < 0)
-			FlxG.save.data.touchPadAlpha = 0;
+		if (FlxG.save.data.touchPadAlpha < 0.1)
+			FlxG.save.data.touchPadAlpha = 0.1;
 
 		if (FlxG.save.data.touchPadAlpha > 1)
 			FlxG.save.data.touchPadAlpha = 1;
@@ -462,8 +462,8 @@ class TouchPadAlphaOption extends Option
 	override function left():Bool {
 		FlxG.save.data.touchPadAlpha = Math.round((FlxG.save.data.touchPadAlpha - 0.1) * 10) / 10;
 
-		if (FlxG.save.data.touchPadAlpha < 0)
-			FlxG.save.data.touchPadAlpha = 0;
+		if (FlxG.save.data.touchPadAlpha < 0.1)
+			FlxG.save.data.touchPadAlpha = 0.1;
 
 		if (FlxG.save.data.touchPadAlpha > 1)
 			FlxG.save.data.touchPadAlpha = 1;
@@ -497,8 +497,8 @@ class HitboxAlphaOption extends Option
 	override function right():Bool {
 		FlxG.save.data.hitboxAlpha = Math.round((FlxG.save.data.hitboxAlpha + 0.1) * 10) / 10;
 
-		if (FlxG.save.data.hitboxAlpha < 0)
-			FlxG.save.data.hitboxAlpha = 0;
+		if (FlxG.save.data.hitboxAlpha < 0.1)
+			FlxG.save.data.hitboxAlpha = 0.1;
 
 		if (FlxG.save.data.hitboxAlpha > 1)
 			FlxG.save.data.hitboxAlpha = 1;
@@ -511,8 +511,8 @@ class HitboxAlphaOption extends Option
 	override function left():Bool {
 		FlxG.save.data.hitboxAlpha = Math.round((FlxG.save.data.hitboxAlpha - 0.1) * 10) / 10;
 
-		if (FlxG.save.data.hitboxAlpha < 0)
-			FlxG.save.data.hitboxAlpha = 0;
+		if (FlxG.save.data.hitboxAlpha < 0.1)
+			FlxG.save.data.hitboxAlpha = 0.1;
 
 		if (FlxG.save.data.hitboxAlpha > 1)
 			FlxG.save.data.hitboxAlpha = 1;

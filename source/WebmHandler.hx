@@ -36,10 +36,10 @@ class WebmHandler
 		}
 	}
 
-	/** 创建 hxvlc 播放器（全局初始化一次；VideoState 每次换源走 updatePlayer） */
+	/** 创建 hxvlc 播放器；若上一轮 VideoState 销毁时把 FlxVideoSprite 一起 destroy 了（bitmap 被清空），这里自动重建 */
 	public function makePlayer():Void
 	{
-		if (initialized) return;
+		if (initialized && video != null && video.bitmap != null) return;
 
 		video = new FlxVideoSprite();
 		// FlxVideoSprite 的事件/音量挂在 bitmap（内部 FlxVideo）上
@@ -55,7 +55,7 @@ class WebmHandler
 	/** 加载 / 切换视频源 */
 	public function updatePlayer():Void
 	{
-		if (!initialized) makePlayer();
+		if (!initialized || video == null || video.bitmap == null) makePlayer();
 		if (vidPath.length <= 0) return;
 
 		stopped = false;
@@ -97,7 +97,7 @@ class WebmHandler
 
 	public function update(elapsed:Float):Void
 	{
-		if (!initialized || video == null) return;
+		if (!initialized || video == null || video.bitmap == null) return;
 
 		// FlxVideoSprite 走 flixel 逻辑坐标，直接用 FlxG.width/height 做 letterbox 居中
 		var ratioX:Float = GameDimensions.height / GameDimensions.width;
